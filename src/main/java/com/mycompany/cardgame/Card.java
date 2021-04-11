@@ -22,7 +22,8 @@ public class Card {
         this.value = value;
     }}
     
-    private JLabel cardImage;
+    private BufferedImage cardImage;
+    private JLabel cardJLabel;
     
     cardRanks rank;
     cardSuits suit;
@@ -52,65 +53,25 @@ public class Card {
         return this.rank.value;
     }
     
-    public int getSuitPos(cardSuits suit){
-        
-        switch (suit) {
-            case Spades:
-                return 0;
-            case Hearts:
-                return 1;
-            case Clubs:
-                return 2;
-            case Diamonds:
-                return 3;
-        }
-        
-        return 0;
+    public void setCardJLabel(BufferedImage cardImage){
+        this.cardJLabel = new JLabel(new ImageIcon(cardImage));
+        this.cardImage = cardImage;
     }
     
-    public int getRankPos(cardRanks rank){
-        switch (rank) {
-            case Ace:
-                return 0;
-            case Two:
-                return 1;
-            case Three:
-                return 2;
-            case Four:
-                return 3;
-            case Five:
-                return 4;
-            case Six:
-                return 5;
-            case Seven:
-                return 6;
-            case Eight:
-                return 7;
-            case Nine:
-                return 8;
-            case Ten:
-                return 9;
-            case Jack:
-                return 10;
-            case Queen:
-                return 11;
-            case King:
-                return 12;
-        }
-        return 0;
-    }
-    
-    public void setCardImage(BufferedImage cardImage){
-        this.cardImage = new JLabel(new ImageIcon(cardImage));
-    }
-    
-    public JLabel getCardImage(){
-        return this.cardImage;
+    public JLabel getCardJLabel(){
+        return this.cardJLabel;
     }
     
     public Boolean getCardByName(cardRanks rank, cardSuits suit){
-        
         return this.rank == rank && this.suit == suit;
+    }
+    
+    public void setCardImage(BufferedImage cardImage){
+        this.cardImage = cardImage;
+    }
+    
+    public BufferedImage getCardImage(){
+        return this.cardImage;
     }
     
     @Override

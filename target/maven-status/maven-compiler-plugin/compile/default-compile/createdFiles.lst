@@ -1,10 +1,12 @@
 cardgameUI\CardGameUI.class
+CardGameSounds\Music$1.class
 com\mycompany\cardgame\Card.class
 com\mycompany\cardgame\Card$cardRanks.class
 com\mycompany\cardgame\CardDeck.class
 com\mycompany\cardgame\CardGame.class
 CardGameSounds\CardGameSounds.class
-com\mycompany\cardgame\Card$1.class
+CardGameSounds\Music.class
 CardGameSounds\soundEffects.class
+cardgameUI\imageResizer.class
 CardGameSounds\SoundManager.class
 com\mycompany\cardgame\Card$cardSuits.class

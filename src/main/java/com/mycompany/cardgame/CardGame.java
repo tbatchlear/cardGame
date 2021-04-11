@@ -5,6 +5,7 @@
  */
 package com.mycompany.cardgame;
 
+import CardGameSounds.Music;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class CardGame {
         }
         
         CardGameUI gameUI = new CardGameUI(bigImg);
+        
+        Music.play("src/main/resources/Music.wav");
 
         gameUI.refreshLayout();
     }

@@ -5,27 +5,34 @@
  */
 package cardgameUI;
 
+import CardGameSounds.Music;
 import com.mycompany.cardgame.Card;
 import com.mycompany.cardgame.CardDeck;
-import com.mycompany.cardgame.CardGame;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SpringLayout.Constraints;
 
 
 public class CardGameUI {
 
     private final JFrame window;
     public CardDeck newDeck;
+    public JPanel cardPanel;
+    GridLayout fullDeck;
+    GridBagLayout mainLayout;
+    GridBagConstraints constraints;
+    JButton shuffleButton;
     
     public CardGameUI(BufferedImage deck){
         window = new JFrame();
@@ -34,18 +41,23 @@ public class CardGameUI {
         window.setResizable(true);
         window.setSize(1200, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GridLayout fullDeck = new GridLayout(4,13);
-        GridBagLayout mainLayout = new GridBagLayout();
-        GridBagConstraints constraints = new GridBagConstraints();
-        JPanel cardPanel = new JPanel();
+        fullDeck = new GridLayout(4,13);
+        mainLayout = new GridBagLayout();
+        constraints = new GridBagConstraints();
+        cardPanel = new JPanel();
         cardPanel.setLayout(fullDeck);
+        cardPanel.setPreferredSize(new Dimension(1000, 500));
         
         newDeck = new CardDeck(deck);
         
         window.setLayout(mainLayout);
         
         for (Card card : newDeck.CARDDECK){
-            cardPanel.add(card.getCardImage());
+            int tempH = card.getCardImage().getHeight()/2;
+            int tempW = card.getCardImage().getWidth()/2;
+            Image tempImage = imageResizer.resizeImage(card.getCardImage(), tempW, tempH);
+            JLabel tempLabel = new JLabel(new ImageIcon(tempImage));
+            cardPanel.add(tempLabel);
         }
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
@@ -55,12 +67,15 @@ public class CardGameUI {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
         constraints.gridy = 1;
-        JButton shuffleButton = new JButton("Shuffle");
+        shuffleButton = new JButton("Shuffle");
         shuffleButton.addActionListener(e -> {
             newDeck.shuffleDeck();
+            Music.play("src/main/resources/Shuffling.wav");
             cardPanel.removeAll();
             for (Card card : newDeck.CARDDECK){
-                cardPanel.add(card.getCardImage());
+                JLabel tempLabel = card.getCardJLabel();
+                tempLabel.setPreferredSize(new Dimension(71, 96));
+                cardPanel.add(tempLabel);
             }
             refreshLayout();
         });
@@ -90,9 +105,4 @@ public class CardGameUI {
         this.window.setVisible(true);
     }
     
-//    public void actionPerformed(ActionEvent e) {
-//        if ("reshuffle".equals(e.getActionCommand())) {
-//            CardDeck.shuffleDeck();
-//        } 
-//    }
 }

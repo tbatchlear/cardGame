@@ -36,7 +36,7 @@ public class CardDeck {
         
         //try {
             for (Card card : CARDDECK){
-            card.setCardImage(spriteSheet.getSubimage(71*card.getRankValue(), 96*card.getSuitValue(), 71, 96));
+            card.setCardJLabel(spriteSheet.getSubimage(71*card.getRankValue(), 96*card.getSuitValue(), 71, 96));
             } 
         //} catch (NullPointerException e){
                 

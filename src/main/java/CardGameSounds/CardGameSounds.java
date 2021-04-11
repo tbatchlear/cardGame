@@ -7,5 +7,5 @@ package CardGameSounds;
 
 
 public enum CardGameSounds {
-    CARD_SHUFFLE, CARD_DEAL
+    CARD_SHUFFLE, CARD_DEAL, TITLE_SCREEN_MUSIC
 }
